@@ -1,0 +1,55 @@
+<!DOCTYPE html><html>
+
+    <head>
+
+        <title>Log Saver</title>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+
+    <body>
+
+        <h1>Sending messages</h1>
+
+        <form action="/log">
+
+            <label for="message">Your message:</label><br>
+
+            <input type="text" id="message" name="message" value="Type a message"><br><br>
+
+            <input type="button" value="Submit" onclick="loadGetMsg()">
+
+        </form>
+
+        <div id="getrespmsg"></div>
+
+
+
+        <script>
+
+            function loadGetMsg() {
+
+                let message = document.getElementById("message").value;
+
+                const xhttp = new XMLHttpRequest();
+
+                xhttp.onload = function() {
+
+                    document.getElementById("getrespmsg").innerHTML =
+
+                    this.responseText;
+
+                }
+
+                xhttp.open("POST", "http://localhost:35000/save");
+                xhttp.setRequestHeader("content-type", "text/plain");
+                xhttp.send(message);
+
+            }
+
+        </script>
+    </body>
+</html>
